@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>{{TITLE}}</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172433;
+      background: #f3f5f8;
+      overflow-wrap: anywhere;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: #0756a6; text-underline-offset: .15em; overflow-wrap: anywhere; }
+    a:hover { color: #00396f; }
+    :focus-visible { outline: 3px solid #1d69c2; outline-offset: 3px; }
+    h1 { margin: 0 0 12px; font-size: clamp(1.9rem, 5vw, 3rem); line-height: 1.15; }
+    h2 { font-size: 1.4rem; margin: 0 0 12px; }
+    h3 { font-size: 1.15rem; margin: 12px 0; }
+    h4 { margin: 18px 0 8px; }
+    p { margin: 10px 0; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    code { font-size: .88em; overflow-wrap: anywhere; }
+    pre {
+      margin: 10px 0;
+      padding: 14px;
+      border-radius: 7px;
+      background: #172433;
+      color: #eef4fa;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+    }
+    pre code { font-size: .81rem; }
+    .hero { padding: 32px 24px; background: #142a40; color: #fff; }
+    .hero a { color: #d3ecff; }
+    .hero p, .hero dt { color: #d2e0eb; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .1em; font-weight: 700; font-size: .76rem; }
+    .inner, main { max-width: 1160px; margin: 0 auto; }
+    main { padding: 22px 24px 40px; }
+    section { margin: 24px 0; }
+    .panel, article {
+      margin: 14px 0;
+      padding: 22px;
+      border: 1px solid #d5dee7;
+      border-radius: 11px;
+      background: #fff;
+      min-width: 0;
+    }
+    article { border-left: 5px solid #6a88a6; }
+    article.priority-P0, article.priority-P1 { border-left-color: #b83a30; }
+    article.priority-P2 { border-left-color: #b46a08; }
+    .badge {
+      display: inline-block;
+      margin: 3px 4px 3px 0;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 750;
+      color: #284f78;
+      background: #e5eef7;
+    }
+    .badge.P0, .badge.P1, .badge.failed, .badge.changes-requested { color: #861c16; background: #fde4e2; }
+    .badge.P2, .badge.blocked, .badge.incomplete, .badge.code-only, .badge.not-run { color: #744000; background: #fff0d6; }
+    .badge.passed, .badge.reproduced, .badge.compared { color: #185b34; background: #e2f5e9; }
+    .badge.no-findings { color: #284f78; background: #e5eef7; }
+    .muted, figcaption, footer { color: #526579; }
+    dl { display: grid; grid-template-columns: minmax(100px, auto) minmax(0, 1fr); gap: 5px 16px; }
+    dt { font-weight: 650; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    ul, ol { padding-left: 1.35rem; }
+    li + li { margin-top: 8px; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 8px 26px; padding-left: 18px; }
+    nav li + li { margin: 0; }
+    .steps { padding-left: 1.5rem; }
+    .retest { margin: 18px 0; padding: 16px; background: #f5f8fc; border: 1px solid #d5e1ec; border-radius: 8px; }
+    .retest h4 { margin-top: 0; }
+    .table-wrap { max-width: 100%; overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+    th, td { padding: 9px 11px; border-bottom: 1px solid #dce4ec; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+    th { background: #f1f5f9; }
+    .evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; margin: 16px 0; }
+    .evidence figure:only-child { grid-column: 1 / -1; }
+    figure { margin: 0; min-width: 0; }
+    figure h4 { margin-top: 0; }
+    img { display: block; max-width: 100%; height: auto; border: 1px solid #d5dee7; border-radius: 6px; }
+    figcaption { margin-top: 8px; font-size: .87rem; }
+    details { margin: 12px 0; }
+    summary { cursor: pointer; color: #0756a6; font-weight: 650; }
+    details pre { max-height: 440px; overflow-y: auto; }
+    .download { display: inline-block; padding: 7px 12px; border-radius: 6px; background: #0756a6; color: #fff; font-weight: 650; text-decoration: none; }
+    .download:hover { color: #fff; background: #00396f; }
+    footer { margin-top: 30px; font-size: .86rem; }
+    @media (max-width: 720px) {
+      .hero { padding: 24px 18px; }
+      main { padding: 14px; }
+      .panel, article { padding: 16px; }
+      .evidence { grid-template-columns: minmax(0, 1fr); }
+      dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+      dd { margin-bottom: 8px; }
+      .retest { padding: 11px; }
+      th, td { padding: 7px; }
+    }
+    @media print {
+      :root { background: #fff; }
+      .hero { background: #fff; color: #172433; padding: 0; }
+      .hero a, .hero p, .hero dt { color: #172433; }
+      .panel, article, figure { break-inside: avoid; }
+      main { padding: 0; }
+      pre, details pre { max-height: none; overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero"><div class="inner">{{HEADER}}</div></header>
+  <main>
+    <nav aria-label="Report contents" class="panel">
+      <ul>
+        <li><a href="#setup">Manual retest setup</a></li>
+        <li><a href="#findings">Findings</a></li>
+        <li><a href="#design">Design comparison</a></li>
+        <li><a href="#coverage">Coverage and checks</a></li>
+        <li><a href="#limitations">Limitations</a></li>
+      </ul>
+    </nav>
+    {{CONTENT}}
+    <footer>All images and fixture downloads are embedded. Source and design links may require access.
+      Local app links require the documented environment. Generating this file does not publish a GitHub review.</footer>
+  </main>
+</body>
+</html>
